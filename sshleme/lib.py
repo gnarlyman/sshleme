@@ -15,6 +15,7 @@ def async_task(func):
 
 
 class SshClient:
+
     def __init__(self, host, context=None):
         self.host = host
         self.context = context
@@ -47,7 +48,6 @@ class SshClient:
             while True:
                 await asyncio.sleep(1)
 
-                print(self.output(f'running: {command}', fields=fields))
                 if not _task:
                     _task = asyncio.ensure_future(conn.run(command))
 
