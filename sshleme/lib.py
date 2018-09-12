@@ -21,7 +21,7 @@ class SshClient:
         self.context = context
         self.start_time = datetime.now()
 
-    async def run(self, command, connect_timeout_secs=3.0, run_timeout_secs=0.0, fields=None):
+    async def run(self, command, connect_timeout_secs=3.0, run_timeout_secs=0.0):
         assert connect_timeout_secs > 0, 'connection_timeout_sec must be greater than 0'
 
         result = None

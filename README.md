@@ -53,7 +53,7 @@ from sshleme.lib import async_task
 
 @async_task
 async def uptime(client):
-    result, error = await client.run('uptime', fields=['name'])
+    result, error = await client.run('uptime')
     if error:
         print(client.output(error, fields=['name']))
     else:
