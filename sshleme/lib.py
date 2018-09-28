@@ -87,7 +87,10 @@ class ConcurrentExecutor:
 
     async def execute_func(self, host, func, context=None):
         result = await func(host, context=context)
-        self.results.append(result)
+        self.results.append({
+            'host': host,
+            'result': result
+        })
         self.running -= 1
 
     async def run_func_on_hosts(self, hosts, func, interval=0.2):
