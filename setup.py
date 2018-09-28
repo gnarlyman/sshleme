@@ -11,7 +11,7 @@ setup(
     version='0.0.1',
     entry_points={
         'console_scripts': [
-            'sshleme=sshleme.sshleme:main'
+            'sshleme=sshleme.run:main'
         ]
     }
 )
