@@ -8,7 +8,7 @@ setup(
     name='sshleme',
     packages=find_packages(),
     install_requires=reqs,
-    version='0.0.1',
+    version='0.0.2',
     entry_points={
         'console_scripts': [
             'sshleme=sshleme.run:main'
