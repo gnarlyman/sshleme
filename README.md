@@ -2,7 +2,9 @@
 
 ## Installation
 
-- install into virtual env
+```commandline
+pip install sshleme
+```
 
 
 ## Usage
