@@ -87,19 +87,25 @@ class ConcurrentExecutor:
 
     async def execute_func(self, host, func, context=None):
         result = await func(host, context=context)
-        self.results.append({
+
+        result_dict = {
             'host': host,
             'result': result
-        })
+        }
+        if context:
+            result_dict.update(context)
+
+        self.results.append(result_dict)
+
         self.running -= 1
 
-    async def run_func_on_hosts(self, hosts, func, interval=0.2):
+    async def run_func_on_hosts(self, hosts, func, interval=0.2, context=None):
         while len(hosts):
             while len(hosts) and self.running < self.concurrent:
                 host = hosts.pop()
                 self.running += 1
 
-                asyncio.ensure_future(self.execute_func(host, func))
+                asyncio.ensure_future(self.execute_func(host, func, context=context))
 
             await asyncio.sleep(interval)
 
