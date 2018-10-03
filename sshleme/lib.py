@@ -84,9 +84,19 @@ class ConcurrentExecutor:
         self.concurrent = concurrent
         self.running = 0
         self.results = []
+        self.errors = []
 
     async def execute_func(self, host, func, context=None):
-        result = await func(host, context=context)
+        try:
+            result = await func(host, context=context)
+        except Exception as e:
+            self.errors.append({
+                'host': host,
+                'error': e
+            })
+            raise
+        finally:
+            self.running -= 1
 
         result_dict = {
             'host': host,
@@ -96,8 +106,6 @@ class ConcurrentExecutor:
             result_dict.update(context)
 
         self.results.append(result_dict)
-
-        self.running -= 1
 
     async def run_func_on_hosts(self, hosts, func, interval=0.2, context=None):
         while len(hosts):

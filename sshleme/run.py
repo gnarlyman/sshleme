@@ -75,6 +75,14 @@ def main():
 
         loop.run_until_complete(executor.run_func_on_rows(rows, args.host_column_name, func_to_run))
 
+    if len(executor.errors):
+        for error_result in executor.errors:
+            host = error_result['host']
+            error = error_result['error']
+
+            print('\nthe following run-time errors occurred:')
+            print(f'{host}: {error}')
+
 
 if __name__ == '__main__':
     main()
