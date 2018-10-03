@@ -11,9 +11,15 @@ from .lib import ConcurrentExecutor
 def get_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-m', dest='module', help='module to import', required=False, default='tasks')
-    parser.add_argument('-r', dest='func_to_run', help='function to run', required=True)
-    parser.add_argument('-c', dest='concur_count', type=int, help='how many connections to make (default: 50)', default=50)
+    parser.add_argument(
+        '-m', dest='module', help='module to import', required=False, default='tasks'
+    )
+    parser.add_argument(
+        '-r', dest='func_to_run', help='function to run', required=True
+    )
+    parser.add_argument(
+        '-c', dest='concur_count', type=int, help='how many connections to make (default: 50)', default=50
+    )
 
     subparsers = parser.add_subparsers(title='commands', dest='command')
 
@@ -22,7 +28,9 @@ def get_args():
         'Each host will be passed though the task function.'
     ))
 
-    hosts_parser.add_argument('-f', dest='hosts_path', help='list of hosts', required=True)
+    hosts_parser.add_argument(
+        '-f', dest='hosts_path', help='list of hosts', required=True
+    )
 
     csv_parser = subparsers.add_parser('csv', help=(
         'Process a csv.\n'
@@ -30,8 +38,12 @@ def get_args():
         'to the task function in the client object.'
     ))
 
-    csv_parser.add_argument('-f', dest='csv_path', help='csv file', required=True)
-    csv_parser.add_argument('-c', dest='host_column_name', help='csv column to use as host', required=True)
+    csv_parser.add_argument(
+        '-f', dest='csv_path', help='csv file', required=True
+    )
+    csv_parser.add_argument(
+        '-c', dest='host_column_name', help='csv column to use as host', required=True
+    )
 
     return parser.parse_args()
 
