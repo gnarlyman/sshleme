@@ -1,3 +1,4 @@
 .idea
 sshleme.egg-info/
 dist
+*.pyc

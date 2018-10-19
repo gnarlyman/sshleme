@@ -21,7 +21,7 @@ class SshClient:
         self.context = context
         self.start_time = datetime.now()
 
-    async def run(self, command, connect_timeout_secs=3.0, run_timeout_secs=0.0):
+    async def run(self, command, connect_timeout_secs=3.0, run_timeout_secs=0.0, username=None):
         assert connect_timeout_secs > 0, 'connection_timeout_sec must be greater than 0'
 
         result = None
@@ -30,7 +30,8 @@ class SshClient:
             conn = await asyncio.wait_for(
                 asyncssh.connect(
                     self.host,
-                    known_hosts=None
+                    known_hosts=None,
+                    username=username
                 ),
                 timeout=connect_timeout_secs
             )
